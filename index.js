@@ -87,6 +87,24 @@ async function run() {
       res.send(books);
     })
 
+     // find data added by a user
+
+     app.get("/my-items", verifyJWT, async(req, res) => {
+      const decodedEmail = req.decoded.email;
+      const email = req.query.email;
+      
+      if(email === decodedEmail){
+
+        const query = {inventoryManager: email};
+        const cursor = collection.find(query);
+        const books = await cursor.toArray();
+        res.send(books);
+      }else {
+        res.status(403).send({message: 'Forbidden access'})
+      }
+      
+    })
+
 
 
   } finally {
