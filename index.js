@@ -117,6 +117,26 @@ async function run() {
       console.log(result);
       res.send(result);
     })
+    // update a data
+
+    app.put("/book/:id", async(req, res) => {
+      
+      const id = req.params.id;
+      console.log(req.body.quantity)
+      const filter = { _id : ObjectId(id)};
+      const options = { upsert: true };
+      const quantity = parseInt(req.body.quantity);
+      const updateDoc = {
+        $set: {
+          stockQuantity: quantity
+        },
+      };
+
+      const result = await collection.updateOne(filter, updateDoc, options);
+      
+      console.log(result);
+      res.send(result);
+    })
 
 
 
