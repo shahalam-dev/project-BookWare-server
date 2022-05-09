@@ -148,6 +148,16 @@ async function run() {
       console.log(result);
       res.send(result);
     })
+
+    // Low Stock items
+    app.get("/lowstock", async(req, res) => {      
+      const query = {};
+      const cursor = collection.find(query).sort({"stockQuantity": 1}).limit(5);
+      const result = await cursor.toArray();
+
+      console.log(result);
+      res.send(result);
+    })
     
 
 
