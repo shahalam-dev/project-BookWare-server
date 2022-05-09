@@ -67,6 +67,16 @@ async function run() {
       console.log(`A book was inserted with the _id: ${result.insertedId}`);
     })
 
+    // homepage all data
+
+    app.get("/homepage/books/", async(req, res) => {
+      
+      const query = {};
+      const cursor = collection.find(query).limit(6);
+      const books = await cursor.toArray();
+      res.send(books);
+    })
+
 
 
   } finally {
