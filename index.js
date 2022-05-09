@@ -77,6 +77,16 @@ async function run() {
       res.send(books);
     })
 
+    // retrive all data
+
+    app.get("/books", async(req, res) => {
+      
+      const query = {};
+      const cursor = collection.find(query);
+      const books = await cursor.toArray();
+      res.send(books);
+    })
+
 
 
   } finally {
